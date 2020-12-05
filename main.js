@@ -1,10 +1,11 @@
 const fb = {
-  api: 'https://graph.facebook.com/v9.0',
+  api: 'https://graph.facebook.com',
   url: 'https://www.facebook.com',
-  page: '103302041643161',
-  //page: '102384434848358',
-  token: 'EAARoMWBeX1EBAMaJrVTK8j52WzL34WVMGyDUkZBUP2NLRqtYJpPALYFGtgnFW8bZCNocpxSZBzKsEZCYu04UZAGST2AfSOLCzgRGXNDdnNBas1bssOJ213fpaIA08O4O8oYZCuyw7nzt5MT9OQUOso7029kZBtSYCYxEfMepld9xKqGcT69ZC4eHDUGgCVZC2J24ZD',
-
+  //page: '103302041643161',
+  page: '102384434848358',
+  //token: 'EAARoMWBeX1EBAMaJrVTK8j52WzL34WVMGyDUkZBUP2NLRqtYJpPALYFGtgnFW8bZCNocpxSZBzKsEZCYu04UZAGST2AfSOLCzgRGXNDdnNBas1bssOJ213fpaIA08O4O8oYZCuyw7nzt5MT9OQUOso7029kZBtSYCYxEfMepld9xKqGcT69ZC4eHDUGgCVZC2J24ZD',
+  token: 'EAALdQZAjSYXkBAKgSfZB9WyXQFsfKKq6vZBr1htZC8vS1Xryp4oWN4oAT0Js6KpZBKiouVLSAElDQfoaUKaCs2Djv1QQJ2bL7lKjeZCXPJDELjDIEAZBGzBGZBcN0MhRVjKXT4BzZCcNM3XTUQeEDwzcCtZCst3zp2x3uOZBxT1L5OAr0cDnMXTvBbw3cdcMVzNw8BaDpJXUj8302K6wazVhMHs',
+  
   getApi(path, fields) {
     var url = new URL(this.api);
     url.pathname = (typeof path == 'string') ? path : path.join('/');
@@ -49,7 +50,9 @@ const nf = {
     var el = document.createElement('div');
     var dt = new Date(created_time);
     var [page_id, post_id] = id.split('_');
-
+    
+    msg = msg.split("\n").slice(0, 4).join('<br>');
+    /*
     if (message_tags && message_tags.length) {
       message_tags.map(({ id, name, offset, length }) => {
         var before = msg.substr(0, offset);
@@ -58,9 +61,7 @@ const nf = {
         msg = before + tag + after;
       });
     }
-
-    msg = msg.replace(/\n/g, '<br>');
-
+    */
     el.className = 'pb-4 pt-2';
     el.innerHTML = view.post
       .replace(/\{id\}/g, id)
@@ -95,7 +96,7 @@ var params = {
 }
 
 
-var url = fb.getApi(['me'], 'fields=feed{child_attachments,created_time,full_picture,id,message,message_tags,picture,story,story_tags,status_type,permalink_url}');
+var url = fb.getApi(['me'], 'fields=feed.limit(100){child_attachments,created_time,full_picture,id,message,message_tags,picture,story,story_tags,status_type,permalink_url}');
 
 fetch(url)
   .then(res => res.json())
