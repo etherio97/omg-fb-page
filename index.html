@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facebook API</title>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+</head>
+
+<body>
+  <div class="container mx-auto my-4">
+    <div class="relative w-80 mx-auto flex flex-col justify-content">
+      <div id="newsfeed" class="divide-y divide-solid divide-gray-200 divide-opacity-50"></div>
+    </div>
+  </div>
+  <template id="post">
+    <div class="">
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="relative mt-0 shadow-sm">
+          <img src="{photo}" alt="picture" class="rounded-sm">
+          <div class="absolute -bottom-4 right-2 rounded-md shadow inline-flex">
+            <a href="{href}" target="_tab" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">View Post</a>
+          </div>
+          <div class="absolute -bottom-5 left-1 max-w-2xl text-xs text-gray-500">
+            <span class="text-gray-400 hover:text-blue-400 transition duration-500 ease-in-out">{published}</span>
+          </div>
+        </div>
+        <div class="px-4 py-7 sm:px-6">
+          <p class="mt-1 max-w-2xl text-sm text-gray-800">
+            {body}
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="photo"></template>
+  <script src="main.js"></script>
+</body>
+
+</html>
